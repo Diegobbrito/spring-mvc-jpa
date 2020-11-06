@@ -1,0 +1,16 @@
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://ww.w3.org/2001/XMLSchema-instance">
+<persistence-unit name="jpa" transaction-type ="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <properties>
+        <property name="spring.jpa.hibernate.ddl-auto" value="create"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa"/>
+        <property name="javax.persistence.jdbc.user" value="springuser"/>
+        <property name="javax.persistence.jdbc.password" value="1234"/>
+
+    </properties>
+</persistence-unit>
+</persistence>
