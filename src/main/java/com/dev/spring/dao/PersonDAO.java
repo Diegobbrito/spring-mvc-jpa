@@ -15,4 +15,14 @@ public class PersonDAO extends GenericDAO<Person> {
 
         return find(jpql,lastName);
     }
+
+    public List<Person> findAgeIsBetween(int min, int max){
+        String jpql = "from Person p where p.age between ? and ?";
+        return find(jpql, min, max);
+    }
+
+    public Person findByFullName(String firtName, String lastName){
+        String jpql = "from Person p where p.firtName like ? and p.lastName like ?";
+        return findOne(jpql, firtName, lastName);
+    }
 }
