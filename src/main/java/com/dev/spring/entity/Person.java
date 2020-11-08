@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,5 +32,16 @@ public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //ToOne Eager, ManyToMany Lazy
     @JoinColumn(name = "document_id")
     private Document document;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)// ToMany usar o EAGER e o person vem do nome dado no atributo em Phone
+    private List<Phone> phones;
+
+    public void addPhone(Phone phone){
+        if(phones == null){
+            phones = new ArrayList<>();
+        }
+        phone.setPerson(this);
+        phones.add(phone);
+    }
 
 }

@@ -2,10 +2,14 @@ package com.dev.spring;
 
 import com.dev.spring.dao.DocumentDAO;
 import com.dev.spring.dao.PersonDAO;
+import com.dev.spring.dao.PhoneDAO;
 import com.dev.spring.entity.Document;
 import com.dev.spring.entity.Person;
+import com.dev.spring.entity.Phone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Arrays;
 
 @SpringBootApplication
 public class Application {
@@ -16,8 +20,68 @@ public class Application {
 //        updatePerson();
 //        insertDocument();
 //        updateDocument();
-        findPersonByCpf();
+//        findPersonByCpf();
+//        insertPhone();
+//        insertPhoneByPerson();
+//        updatePhone();
     }
+
+    private static void updatePhone() {
+
+        Person person = new PersonDAO().findById(9L);
+
+        PhoneDAO dao = new PhoneDAO();
+
+        Phone phone = dao.findById(2L);
+
+        phone.setPerson(person);
+        dao.update(phone);
+
+        phone = dao.findById(phone.getId());
+
+        System.out.println(phone.toString());
+    }
+
+
+    private static void insertPhoneByPerson() {
+        Phone phone1 = new Phone(Phone.TypePhone.CELULAR, "900595022");
+        Phone phone2 = new Phone(Phone.TypePhone.COMERCIAL, "553440022");
+
+        Person person = new Person();
+        person.setFirstName("Jojo");
+        person.setLastName("Figueira");
+        person.setAge(20);
+        person.setDocument(new Document("245.385.638-99", 95244557));
+
+//        phone1.setPerson(person);
+//        phone2.setPerson(person);
+//        person.setPhones(Arrays.asList(phone1, phone2));
+
+        person.addPhone(phone1);
+        person.addPhone(phone2);
+
+        new PersonDAO().save(person);
+
+    }
+
+    private static void insertPhone() {
+        Person p1 = new Person();
+        p1.setFirstName("Jonata");
+        p1.setLastName("Figueira");
+        p1.setAge(29);
+        p1.setDocument(new Document("112.345.678-99", 1234567));
+        Phone phone = new Phone(Phone.TypePhone.CELULAR, "991990022");
+        phone.setPerson(p1);
+
+        PhoneDAO dao = new PhoneDAO();
+
+        dao.save(phone);
+
+        phone = dao.findById(phone.getId());
+
+        System.out.println(phone.toString());
+    }
+
 
     private static void findPersonByCpf() {
 
