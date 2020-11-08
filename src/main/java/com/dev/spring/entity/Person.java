@@ -44,4 +44,10 @@ public class Person implements Serializable {
         phones.add(phone);
     }
 
+    public void delPhone(Phone phone){
+        if(phones != null){
+            phones.remove(phone);
+        }
+    }
+
 }

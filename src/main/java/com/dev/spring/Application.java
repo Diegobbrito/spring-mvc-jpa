@@ -24,8 +24,32 @@ public class Application {
 //        insertPhone();
 //        insertPhoneByPerson();
 //        updatePhone();
+//        updatePhoneByPerson();
+//        deleteOnCascade();
     }
 
+    private static void deleteOnCascade() {
+
+        new PersonDAO().delete(9L);
+    }
+    private static void updatePhoneByPerson() {
+        Person person = new PersonDAO().findById(9L);
+
+        for (Phone phone: person.getPhones()) {
+            System.out.println("1- " + phone.toString());
+            if(Phone.TypePhone.COMERCIAL == phone.getType()){
+                phone.setType(Phone.TypePhone.RESIDENCIAL);
+            }
+        }
+
+        new PersonDAO().update(person);
+
+        for (Phone phone: person.getPhones()) {
+            System.out.println("2- " + phone.toString());
+
+        }
+
+    }
     private static void updatePhone() {
 
         Person person = new PersonDAO().findById(9L);
@@ -41,8 +65,6 @@ public class Application {
 
         System.out.println(phone.toString());
     }
-
-
     private static void insertPhoneByPerson() {
         Phone phone1 = new Phone(Phone.TypePhone.CELULAR, "900595022");
         Phone phone2 = new Phone(Phone.TypePhone.COMERCIAL, "553440022");
@@ -63,7 +85,6 @@ public class Application {
         new PersonDAO().save(person);
 
     }
-
     private static void insertPhone() {
         Person p1 = new Person();
         p1.setFirstName("Jonata");
@@ -81,21 +102,17 @@ public class Application {
 
         System.out.println(phone.toString());
     }
-
-
     private static void findPersonByCpf() {
 
         Person p = new PersonDAO().findByCpf("123.456.789-99");
         System.out.println(p.toString());
     }
-
     private static void updateDocument() {
 
         Document doc = new DocumentDAO().findById(1L);
         doc.setCpf("123.456.789-99");
         new DocumentDAO().update(doc);
     }
-
     private static void insertDocument() {
 
         Person p1 = new Person();
@@ -106,8 +123,6 @@ public class Application {
         new PersonDAO().save(p1);
         System.out.println(p1.toString());
     }
-
-
     private static void updatePerson(){
         Person p = new PersonDAO().findById(2L);
 
@@ -120,7 +135,6 @@ public class Application {
         System.out.println(p.toString());
 
     }
-
     private static void insertPerson(){
         Person p1 = new Person();
         p1.setFirstName("Ana Maria");
