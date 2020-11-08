@@ -25,4 +25,10 @@ public class PersonDAO extends GenericDAO<Person> {
         String jpql = "from Person p where p.firtName like ? and p.lastName like ?";
         return findOne(jpql, firtName, lastName);
     }
+
+    public Person findByCpf(String cpf){
+        String jpql = "select p from Person p, Document d where d.cpf like ?1 and p.document.id = d.id";
+
+        return findOne(jpql, cpf);
+    }
 }

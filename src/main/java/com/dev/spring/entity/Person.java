@@ -27,4 +27,8 @@ public class Person implements Serializable {
     @Column(name = "age",nullable = false)
     private Integer age;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //ToOne Eager, ManyToMany Lazy
+    @JoinColumn(name = "document_id")
+    private Document document;
+
 }
