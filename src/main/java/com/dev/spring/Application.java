@@ -3,6 +3,7 @@ package com.dev.spring;
 import com.dev.spring.dao.DocumentDAO;
 import com.dev.spring.dao.PersonDAO;
 import com.dev.spring.dao.PhoneDAO;
+import com.dev.spring.entity.Address;
 import com.dev.spring.entity.Document;
 import com.dev.spring.entity.Person;
 import com.dev.spring.entity.Phone;
@@ -26,8 +27,31 @@ public class Application {
 //        updatePhone();
 //        updatePhoneByPerson();
 //        deleteOnCascade();
+//        insertAddressByPerson();
     }
 
+    private static void insertAddressByPerson() {
+        Address ad1 = new Address();
+        ad1.setCity("Rio de Janeiro");
+        ad1.setStreet("Av Copacabana, 32");
+        ad1.setType(Address.TypeAddress.RESIDENSIAL);
+
+        Address ad2 = new Address();
+        ad2.setCity("Rio de Janeiro");
+        ad2.setStreet("Av Ipanema, 54");
+        ad2.setType(Address.TypeAddress.COMERCIAL);
+
+        Person person = new Person();
+        person.setFirstName("Aline Mario");
+        person.setLastName("da Silva");
+        person.setAge(26);
+        person.setDocument(new Document("752.852.852-98", 887528465));
+        person.addPhone(new Phone(Phone.TypePhone.CELULAR, "36558971"));
+        person.setAddresses(Arrays.asList(ad1,ad2));
+
+        new PersonDAO().save(person);
+
+    }
     private static void deleteOnCascade() {
 
         new PersonDAO().delete(9L);
