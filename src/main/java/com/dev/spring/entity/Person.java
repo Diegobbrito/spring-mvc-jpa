@@ -36,6 +36,14 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)// ToMany usar o EAGER e o person vem do nome dado no atributo em Phone
     private List<Phone> phones;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "persons_addresses",
+            joinColumns = @JoinColumn(name = "id_person"),
+            inverseJoinColumns = @JoinColumn(name = "id_address")
+    )
+    private List<Address> addresses;
+
     public void addPhone(Phone phone){
         if(phones == null){
             phones = new ArrayList<>();
